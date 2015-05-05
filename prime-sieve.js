@@ -1,4 +1,4 @@
-// TODO: memoize! Also
+// TODO: memoize!
 
 // We'll start out with an iterator on all integers starting with n.
 var numbers = function* (n) {
@@ -24,24 +24,29 @@ var multipleOf = function (x) {
     return n % x === 0;
   };
 };
+
 var not = function (fn) {
   return function () {
     return !fn.apply(this, arguments);
   };
 };
 
-// add a value to the front of a stream
-var consStream = function* (first, rest) {
-  yield first;
-  yield* consStream(rest.next().value, rest);
-};
-
 // And finally, our sieve!
 var primes = function* (nums) {
   nums = nums || numbers(2);
   var n = nums.next().value;
-  yield* consStream(n, primes(filterIter(nums, not(multipleOf(n)))));
+  yield n;
+  yield* primes(filterIter(nums, not(multipleOf(n))));
 };
 
+// Get the nth value from an iterable. Assumes you initialize
+// iterable on passing it in: e.g. nth(primes(), 100)
+var nth = function (iter, n) {
+  var i = 0;
+  while (i++ < n) {
+    iter.next();
+  }
+  return iter.next().value;
+};
 
 

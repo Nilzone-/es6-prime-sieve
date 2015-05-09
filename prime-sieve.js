@@ -1,6 +1,5 @@
-// TODO: memoize!
-
-// We'll start out with an iterator on all integers starting with n.
+// We'll start out with a generator that gives us an iterator
+// on all integers starting with n.
 var numbers = function* (n) {
   n = n || 0;
   while (true) {
@@ -8,6 +7,8 @@ var numbers = function* (n) {
   }
 };
 
+// Generic filter for iterators.
+// Takes an iterator, returns a filtered iterator
 var filterIter = function* (iter, test) {
   for (var val of iter) {
     if (test(val)) {
@@ -39,8 +40,9 @@ var primes = function* (nums) {
   yield* primes(filterIter(nums, not(multipleOf(n))));
 };
 
-// Get the nth value from an iterable. Assumes you initialize
-// iterable on passing it in: e.g. nth(primes(), 100)
+// Get the nth value from an iterator. Or rather, get the value
+// that is n places from wherever the iterator currently is (in
+// case the iterator was enumerated before being passed to nth)
 var nth = function (iter, n) {
   var i = 0;
   while (i++ < n) {

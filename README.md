@@ -1,5 +1,5 @@
 # es6-prime-sieve
-An implementation of [Eratostethenes' Prime Sieve](http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) 
-using ES6 iterators. Mostly, it's an exercise in understanding how to compose ES6 iterators.
+An implementation of [Eratosthenes' Prime Sieve](http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) 
+using ES6 iterators. Mostly, it's an exercise in composing ES6 generators and iterators.
 
-TODO: add some memoization, as in SICP Ch3.
+Update: this is **not** the Sieve of Eratosthenes, [as this paper shows](http://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf). It finds primes but with a different and less efficient technique.
